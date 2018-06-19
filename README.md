@@ -20,7 +20,7 @@ clone至本地：
 
 运行结果：
 
-![mnist.png](https://github.com/liu-nlper/MNIST_GAN/code/mnist.png)
+![mnist.png](https://github.com/liu-nlper/MNIST_GAN/blob/master/code/mnist.png)
 
 注：noise输入是随机产生，所以每次运行结果都会不一样。
 
