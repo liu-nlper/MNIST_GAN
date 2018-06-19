@@ -20,7 +20,11 @@ clone至本地：
 
 运行结果：
 
+**图1.**： 不同迭代次数下生成器对同一个噪声输入产生的输出
 ![mnist.png](https://github.com/liu-nlper/MNIST_GAN/blob/master/code/mnist.png)
+
+**图2.**： 最后一次迭代噪声输入产生的输出
+![mnist.png](https://github.com/liu-nlper/MNIST_GAN/blob/master/code/mnist2.png)
 
 注：noise输入是随机产生，所以每次运行结果都会不一样。
 

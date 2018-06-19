@@ -51,7 +51,7 @@ def show_image_batch(images, show=False, path='./mnist.png'):
             break
         i, j = k // width, k % width
         ax[i, j].cla()
-        ax[i, j].imshow(images[k].view(28, 28), cmap='gray')
+        ax[i, j].imshow(images[k].view(28, 28), cmap='Greys_r')
     plt.savefig(path)
     if show:
         plt.show()

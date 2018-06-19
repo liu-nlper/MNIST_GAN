@@ -29,7 +29,7 @@ class Generator(nn.Module):
             outputs: generator outputs, size=[bs, out_dim]
         """
         logits = self.hidden_layer(inputs)
-        logits = F.leaky_relu(logits, 0.1)
+        logits = F.leaky_relu(logits, 0.01)
         logits = self.dropout_layer(logits)
         logits = self.output_layer(logits)
         outputs = F.tanh(logits)
@@ -57,7 +57,7 @@ class Discriminator(nn.Module):
             outputs: size=[bs]
         """
         logits = self.hidden_layer(inputs)
-        logits = F.leaky_relu(logits, 0.1)
+        logits = F.leaky_relu(logits, 0.01)
         logits = self.output_layer(logits)
         outputs = F.sigmoid(logits).view(-1)
         return outputs

@@ -14,9 +14,10 @@ from model import Generator, Discriminator
 n_hidden = 128
 noise_dim = 100
 img_dim = 28 * 28
-batch_size = 256
-n_epoch = 100
+batch_size = 512
+n_epoch = 256
 lr = 0.001
+smooth = 0.1
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 # init datasets
@@ -42,17 +43,19 @@ g_test_outputs = []
 # train...
 for epoch in range(n_epoch):
     loss_discriminator_all, loss_generator_all = [], []
+    loss_discriminator_real_all, loss_discriminator_fake_all = [], []
     print('Epoch {0} / {1}:'.format(epoch+1, n_epoch))
     images4show = None
     for batch in data_loader:
 
         # real data
-        inputs_real, labels_real = batch[0], batch[1]
+        inputs_real = batch[0]
         inputs_real = inputs_real.view(inputs_real.size(0), -1)  # [bs, 28*28]
         inputs_real = inputs_real.to(device)
 
         # feak data
         inputs_noise = torch.randn((batch_size, noise_dim)).to(device)
+        inputs_noise.uniform_(-1, 1)
 
         # 训练判别器
         discriminator.zero_grad()
@@ -62,10 +65,12 @@ for epoch in range(n_epoch):
         d_outputs_real = discriminator(inputs_real)
         d_outputs_fake = discriminator(g_outputs)
         loss_real = loss_function(
-            d_outputs_real, torch.ones(d_outputs_real.size(0)).to(device))
+            d_outputs_real, torch.ones(d_outputs_real.size(0)).to(device) * (1 - smooth))
         loss_fake = loss_function(
             d_outputs_fake, torch.zeros(d_outputs_fake.size(0)).to(device))
         loss_discriminator = loss_real + loss_fake
+        loss_discriminator_real_all.append(loss_real.item())
+        loss_discriminator_fake_all.append(loss_fake.item())
         loss_discriminator_all.append(loss_discriminator.item())
         loss_discriminator.backward(retain_graph=True)
         optimizer_d.step()
@@ -73,7 +78,7 @@ for epoch in range(n_epoch):
         # 训练生成器
         generator.zero_grad()
         loss_generator = loss_function(
-            d_outputs_fake, torch.ones(d_outputs_fake.size(0)).to(device))
+            d_outputs_fake, torch.ones(d_outputs_fake.size(0)).to(device) * (1 - smooth))
         loss_generator_all.append(loss_generator.item())
         loss_generator.backward()
         optimizer_g.step()
@@ -82,9 +87,13 @@ for epoch in range(n_epoch):
     g_test_output = generator(noise4test)
     g_test_outputs.append(g_test_output.data)
 
-    print('discriminator loss: {0:.2f}, generator loss: {1:.2f}'.format(
-        np.mean(loss_discriminator_all), np.mean(loss_generator_all)))
+    print('\tDiscriminator loss: {0:.2f}(Real: {1:.2f}, Fake: {2:.2f}), generator loss: {3:.2f}'.format(
+        np.mean(loss_discriminator_all), np.mean(loss_discriminator_real_all),
+        np.mean(loss_discriminator_fake_all), np.mean(loss_generator_all)))
 
 # 测试生成器在不同迭代次数下，对用一个输入(noise)产生的输出
 g_test_outputs = torch.cat(g_test_outputs, 0)
-show_image_batch(g_test_outputs, show=True)
+show_image_batch(g_test_outputs, show=False)
+
+# 最后一次迭代的噪声经过生成器后的输出
+show_image_batch(g_outputs.data.view(batch_size, 28*28)[:100], show=False, path='mnist2.png')
