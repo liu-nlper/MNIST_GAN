@@ -23,7 +23,7 @@ clone至本地：
 
 ![mnist.png](https://github.com/liu-nlper/MNIST_GAN/blob/master/mnist_gan/mnist.png)
 
-**图2.**： 训练结束后生成器产生的输出
+**图2.**： 训练结束后生成器产生的样例输出
 
 ![mnist.png](https://github.com/liu-nlper/MNIST_GAN/blob/master/mnist_gan/mnist2.png)
 
