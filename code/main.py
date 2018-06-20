@@ -97,7 +97,7 @@ for epoch in range(n_epoch):
 
 # 测试生成器在不同迭代次数下，对用一个输入(noise)产生的输出
 g_test_outputs = torch.cat(g_test_outputs, 0)
-show_image_batch(g_test_outputs, show=False)
+show_image_batch(g_test_outputs, show=False, path='mnist.png')
 
 # feak data
 generator.eval()
