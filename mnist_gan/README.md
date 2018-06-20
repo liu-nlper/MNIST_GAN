@@ -8,9 +8,9 @@ clone至本地：
 
 安装依赖项：
 
-    $ cd MNIST_GAN/code
-    $ sudo pip3 install -r ./code/requirements.txt --upgrade  # for all user
-    $ pip3 install -r ./code/requirements.txt --upgrade --user  # for current user
+    $ cd MNIST_GAN/mnist_gan
+    $ sudo pip3 install -r requirements.txt --upgrade  # for all user
+    $ pip3 install -r requirements.txt --upgrade --user  # for current user
 
 运行：
 
