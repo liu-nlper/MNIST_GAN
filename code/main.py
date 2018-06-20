@@ -91,7 +91,7 @@ for epoch in range(n_epoch):
     g_test_output = generator(noise4test)
     g_test_outputs.append(g_test_output.data)
 
-    print('\tDiscriminator loss: {0:.2f}(Real: {1:.2f}, Fake: {2:.2f}), generator loss: {3:.2f}'.format(
+    print('\tDiscriminator loss: {0:.2f}(Real: {1:.2f}, Fake: {2:.2f}), Generator loss: {3:.2f}'.format(
         np.mean(loss_discriminator_all), np.mean(loss_discriminator_real_all),
         np.mean(loss_discriminator_fake_all), np.mean(loss_generator_all)))
 
