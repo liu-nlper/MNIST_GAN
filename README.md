@@ -21,11 +21,11 @@ clone至本地：
 
 **图1.**： 不同迭代次数下生成器对同一个噪声输入产生的输出
 
-![mnist.png](https://github.com/liu-nlper/MNIST_GAN/blob/master/code/mnist.png)
+![mnist.png](https://github.com/liu-nlper/MNIST_GAN/blob/master/mnist_gan/mnist.png)
 
 **图2.**： 迭代100次后生成器的输出
 
-![mnist.png](https://github.com/liu-nlper/MNIST_GAN/blob/master/code/mnist2.png)
+![mnist.png](https://github.com/liu-nlper/MNIST_GAN/blob/master/mnist_gan/mnist2.png)
 
 从图中可以看出，由于生成器是一个两层的MLP，学习能力较弱，所以生成的手写数字图像质量不高。
 
