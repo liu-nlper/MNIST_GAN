@@ -8,13 +8,12 @@ clone至本地：
 
 安装依赖项：
 
-    $ cd MNIST_GAN
+    $ cd MNIST_GAN/code
     $ sudo pip3 install -r ./code/requirements.txt --upgrade  # for all user
     $ pip3 install -r ./code/requirements.txt --upgrade --user  # for current user
 
 运行：
 
-    $ cd code
     $ python3 main.py  # cpu
     $ CUDA_VISIBLE_DEVICES=0 python3 main.py  # gpu
 
