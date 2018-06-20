@@ -14,7 +14,7 @@ from model import Generator, Discriminator
 n_hidden = 128
 noise_dim = 100
 img_dim = 28 * 28
-batch_size = 512
+batch_size = 256
 n_epoch = 256
 lr = 0.001
 smooth = 0.1
@@ -52,12 +52,12 @@ for epoch in range(n_epoch):
     for batch in data_loader:
 
         # real data
-        inputs_real = batch[0]
+        inputs_real = batch[0] * 2 - 1  # [0, 1] -> [-1, 1]
         inputs_real = inputs_real.view(inputs_real.size(0), -1)  # [bs, 28*28]
         inputs_real = inputs_real.to(device)
 
         # feak data
-        inputs_noise = torch.randn((batch_size, noise_dim)).to(device)
+        inputs_noise = torch.randn((inputs_real.size(0), noise_dim)).to(device)
         inputs_noise.uniform_(-1, 1)
 
         # 训练判别器
