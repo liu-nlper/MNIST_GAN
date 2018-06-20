@@ -46,6 +46,9 @@ for epoch in range(n_epoch):
     loss_discriminator_real_all, loss_discriminator_fake_all = [], []
     print('Epoch {0} / {1}:'.format(epoch+1, n_epoch))
     images4show = None
+
+    generator.train()
+    discriminator.train()
     for batch in data_loader:
 
         # real data
@@ -84,6 +87,7 @@ for epoch in range(n_epoch):
         optimizer_g.step()
 
     # 测试用例
+    generator.eval()
     g_test_output = generator(noise4test)
     g_test_outputs.append(g_test_output.data)
 
@@ -95,5 +99,9 @@ for epoch in range(n_epoch):
 g_test_outputs = torch.cat(g_test_outputs, 0)
 show_image_batch(g_test_outputs, show=False)
 
-# 最后一次迭代的噪声经过生成器后的输出
-show_image_batch(g_outputs.data.view(batch_size, 28*28)[:100], show=False, path='mnist2.png')
+# feak data
+generator.eval()
+inputs_noise = torch.randn((100, noise_dim)).to(device)
+inputs_noise.uniform_(-1, 1)
+g_outputs = generator(inputs_noise)
+show_image_batch(g_outputs.data.view(100, 28*28), show=False, path='mnist2.png')
