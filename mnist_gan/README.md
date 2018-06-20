@@ -1,4 +1,4 @@
-Mnist GAN PyTorch版本，详细介绍可以参考知乎专栏[机器不学习](https://zhuanlan.zhihu.com/zhaoyeyu)的文章[生成对抗网络（GAN）之MNIST数据生成](https://zhuanlan.zhihu.com/p/28057434)。
+PyTorch版本mnist GAN，详细介绍可以参考知乎专栏[机器不学习](https://zhuanlan.zhihu.com/zhaoyeyu)的文章[生成对抗网络（GAN）之MNIST数据生成](https://zhuanlan.zhihu.com/p/28057434)。
 
 ## 1. run
 
